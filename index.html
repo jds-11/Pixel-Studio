@@ -1,11 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Pixel Studio</title>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    
+
+    <h1>Pixel Studio</h1>
+
+    <div id="toolbar">
+        <button class="tool-btn active" data-tool="draw"> Draw</button>
+        <button class="tool-btn" data-tool="erase"> Erase</button>
+        <button class="tool-btn" data-tool="fill"> Fill</button>
+        <input type="color" id="colorPicker" value="#000000" />
+        <button id="clearBtn"> Clear</button>
+        <button id="exportBtn">Export</button>
+    </div>
+
+    <!-- Het canvas waar je op tekent -->
+    <canvas id="pixelCanvas"></canvas>
+
+    <script src="main.js"></script>
 </body>
+
 </html>
