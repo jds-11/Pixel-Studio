@@ -6,6 +6,13 @@ body {
     padding: 20px;
 }
 
+h1 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+    color: #e94560;
+}
+
 #toolbar {
     margin-bottom: 20px;
 }
@@ -28,4 +35,6 @@ button:hover {
 #pixelCanvas {
     border: 2px solid white;
     cursor: crosshair;
+    display: block;
+    margin: 0 auto;
 }
