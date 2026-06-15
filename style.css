@@ -15,21 +15,43 @@ h1 {
 
 #toolbar {
     margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 button {
     padding: 8px 16px;
-    margin: 4px;
     font-size: 16px;
     cursor: pointer;
     background-color: #333;
     color: white;
     border: none;
     border-radius: 4px;
+    transition: background-color 0.2s;
 }
 
 button:hover {
     background-color: #e94560;
+}
+
+/* Week 4 - actief gereedschap markeren */
+button.active {
+    background-color: #e94560;
+    outline: 2px solid white;
+}
+
+/* Week 4 - color picker styling */
+#colorPicker {
+    width: 40px;
+    height: 36px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 2px;
+    background-color: #333;
 }
 
 #pixelCanvas {
