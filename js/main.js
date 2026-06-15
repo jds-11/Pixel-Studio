@@ -24,7 +24,6 @@ class Grid {
     }
   }
 
-  // Week 4 - reset alle pixels
   clear() {
     for (let r = 0; r < this.rows; r++)
       for (let c = 0; c < this.cols; c++)
@@ -92,7 +91,7 @@ class FillTool extends Tool {
   }
 }
 
-// Week 1 + 2 + 3 + 4 - App class
+// Week 1 + 2 + 3 + 4 + 5 - App class
 class App {
   constructor() {
     this.canvas = document.getElementById("pixelCanvas");
@@ -102,7 +101,6 @@ class App {
 
     this.grid = new Grid();
 
-    // Week 4 - alle tools in een object
     this.tools = {
       draw:  new PenTool(),
       erase: new EraserTool(),
@@ -115,13 +113,11 @@ class App {
   }
 
   _bindEvents() {
-    // Week 4 - ColorPicker
     document.getElementById("colorPicker").addEventListener("input", (e) => {
       this.tools.draw.color = e.target.value;
       this.tools.fill.color = e.target.value;
     });
 
-    // Week 4 - tool switching met active class
     document.querySelectorAll(".tool-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document.querySelectorAll(".tool-btn").forEach((b) => b.classList.remove("active"));
@@ -130,30 +126,38 @@ class App {
       });
     });
 
-    // Week 4 - clear button
     document.getElementById("clearBtn").addEventListener("click", () => {
       this.clear();
     });
 
-    // Week 3 - canvas events
+    // Week 5 - export knop
+    document.getElementById("exportBtn").addEventListener("click", () => {
+      this.exportPNG();
+    });
+
     this.canvas.addEventListener("mousedown", (e) => { this.teken(e); });
     this.canvas.addEventListener("mousemove", (e) => {
       if (e.buttons === 1) this.teken(e);
     });
   }
 
-  // Week 4 - wissel actief gereedschap
   setTool(type) {
     this.currentTool = this.tools[type];
   }
 
-  // Week 4 - alles resetten
   clear() {
     this.grid.clear();
     this.render();
   }
 
-  // Week 3 - teken methode
+  // Week 5 - exporteer canvas als PNG
+  exportPNG() {
+    const link = document.createElement("a");
+    link.download = "pixel-art.png";
+    link.href = this.canvas.toDataURL("image/png");
+    link.click();
+  }
+
   teken(e) {
     const rect = this.canvas.getBoundingClientRect();
     const row  = Math.floor((e.clientY - rect.top)  / 16);
@@ -166,7 +170,6 @@ class App {
     this.render();
   }
 
-  // Week 2 - render functie
   render() {
     this.ctx.fillStyle = "#111111";
     this.ctx.fillRect(0, 0, 512, 512);
