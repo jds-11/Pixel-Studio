@@ -2,9 +2,9 @@
 class Pixel {
   constructor(row, col) {
     this.color = null;
-    this.row   = row;   // nieuw week 2
-    this.col   = col;   // nieuw week 2
-    this.size  = 16;    // nieuw week 2
+    this.row   = row;
+    this.col   = col;
+    this.size  = 16;
   }
 }
 
@@ -24,15 +24,31 @@ class Grid {
   }
 }
 
-// Week 1 - Tool class
+// Week 1 - Tool basisclass
+// Week 3 - uitgebreid met use() methode
 class Tool {
-  constructor() {
-    this.type  = "draw";
+  constructor(type) {
+    this.type  = type;
     this.color = "#000000";
+  }
+
+  use(grid, row, col) {
+    // wordt overschreven door subclasses
   }
 }
 
-// Week 1 + Week 2 - App class met render functie
+// Week 3 - PenTool subclass
+class PenTool extends Tool {
+  constructor() {
+    super("draw");
+  }
+
+  use(grid, row, col) {
+    grid.pixels[row][col].color = this.color;
+  }
+}
+
+// Week 1 + 2 + 3 - App class
 class App {
   constructor() {
     this.canvas = document.getElementById("pixelCanvas");
@@ -41,8 +57,27 @@ class App {
     this.canvas.height = 512;
 
     this.grid = new Grid();
-    this.tool = new Tool();
+    this.tool = new PenTool(); // week 3
 
+    // Week 3 - canvas events
+    this.canvas.addEventListener("mousedown", (e) => { this.teken(e); });
+    this.canvas.addEventListener("mousemove", (e) => {
+      if (e.buttons === 1) this.teken(e);
+    });
+
+    this.render();
+  }
+
+  // Week 3 - berekent welke pixel is aangeklikt
+  teken(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    const row  = Math.floor((e.clientY - rect.top)  / 16);
+    const col  = Math.floor((e.clientX - rect.left) / 16);
+
+    if (row < 0 || row >= this.grid.rows) return;
+    if (col < 0 || col >= this.grid.cols) return;
+
+    this.tool.use(this.grid, row, col);
     this.render();
   }
 
