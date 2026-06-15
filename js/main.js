@@ -35,7 +35,7 @@ class Grid {
 class Tool {
   constructor(type) {
     this.type  = type;
-    this.color = "#000000";
+    this.color = "#ffffff";
   }
 
   use(grid, row, col) {
@@ -130,7 +130,6 @@ class App {
       this.clear();
     });
 
-    // Week 5 - export knop
     document.getElementById("exportBtn").addEventListener("click", () => {
       this.exportPNG();
     });
